@@ -1,0 +1,41 @@
+# Copy this to config.yaml and fill in your values
+log:
+  path: /var/log/nginx/hng-access.log
+  poll_interval_ms: 100
+
+sliding_window:
+  per_ip_seconds: 60
+  global_seconds: 60
+
+baseline:
+  window_minutes: 30
+  recalc_interval_seconds: 60
+  min_samples: 30
+  floor_mean: 1.0
+  floor_stddev: 0.5
+
+detection:
+  zscore_threshold: 3.0
+  rate_multiplier: 5.0
+  error_rate_multiplier: 3.0
+  tightened_zscore: 2.0
+  tightened_multiplier: 3.0
+
+blocking:
+  ban_alert_timeout_seconds: 10
+  backoff_schedule_minutes:
+    - 10
+    - 30
+    - 120
+    - -1
+
+slack:
+  webhook_url: "YOUR_SLACK_WEBHOOK_URL_HERE"
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8080
+  refresh_interval_seconds: 3
+
+audit:
+  path: /var/log/hng-detector/audit.log
